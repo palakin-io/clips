@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { bufferToggle } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { RegisterValidators } from '../validators/register-validators';
+import { EmailTaken } from '../validators/email-taken';
 
 
 @Component({
@@ -10,12 +12,12 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  constructor(private auth: AuthService){}
+  constructor(private auth: AuthService, private emailTaken: EmailTaken){}
 
   inSubmission:boolean = false;
 
   name= new FormControl('', [Validators.required, Validators.minLength(4)])
-  email= new FormControl('', [Validators.required, Validators.email])
+  email= new FormControl('', [Validators.required, Validators.email], [this.emailTaken.validate])
   age= new FormControl('', [Validators.required, Validators.min(18), Validators.max(95)])
   password= new FormControl('', [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm), Validators.maxLength(45)])
   confirmPassword= new FormControl('' , [Validators.required])
@@ -32,7 +34,7 @@ export class RegisterComponent {
     email: this.email,
     confirmPassword: this.confirmPassword,
     phoneNumber: this.phoneNumber
-  })
+  },[RegisterValidators.match('password', 'confirmPassword')])
 
   async register(){
     this.inSubmission = true;
