@@ -26,6 +26,7 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   closeModal() {
     this.modal.toggleModal(this.modalID)
+    console.log(this.modalID)
   }
 
 }
