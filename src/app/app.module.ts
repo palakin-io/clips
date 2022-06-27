@@ -17,6 +17,8 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { ClipListComponent } from './clip-list/clip-list.component';
 import { FbTimestampPipe } from './pipes/fb-timestamp.pipe';
 
+
+//prod
 @NgModule({
   declarations: [
     AppComponent,
