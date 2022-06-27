@@ -34,7 +34,10 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "video.js"
+           ]
           },
           "configurations": {
             "production": {
